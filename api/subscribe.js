@@ -79,3 +79,47 @@ export default async function handler(req, res) {
   // validation and provider code same as above
 }
 */
+  // Example: If you want to forward to Mailchimp, set environment variables:
+  // MAILCHIMP_API_KEY and MAILCHIMP_LIST_ID (audience id).
+  // Uncomment and replace the code below with your Mailchimp call.
+  //
+  // const fetch = require("node-fetch");
+  // const API_KEY = process.env.MAILCHIMP_API_KEY;
+  // const LIST_ID = process.env.MAILCHIMP_LIST_ID;
+  // if (API_KEY && LIST_ID) {
+  //   const dc = API_KEY.split("-")[1]; // datacenter suffix
+  //   const url = `https://${dc}.api.mailchimp.com/3.0/lists/${LIST_ID}/members`;
+  //   const payload = {
+  //     email_address: email,
+  //     status: "subscribed"
+  //   };
+  //   const resp = await fetch(url, {
+  //     method: "POST",
+  //     headers: {
+  //       "Authorization": `apikey ${API_KEY}`,
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify(payload)
+  //   });
+  //   const result = await resp.json();
+  //   if (!resp.ok) {
+  //     return { statusCode: 500, body: JSON.stringify({ message: result.detail || "Failed to subscribe" }) };
+  //   }
+  //   return { statusCode: 200, body: JSON.stringify({ message: "Subscription successful" }) };
+  // }
+
+  // For demo purposes: pretend the email was saved.
+  // Replace with a real persistence step (database, Mailchimp, etc.) as needed.
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: "Thanks — you're on the list!" }),
+  };
+};
+
+/* Vercel (Next.js API) equivalent:
+export default async function handler(req, res) {
+  if (req.method !== "POST") return res.status(405).json({ message: "Method not allowed" });
+  const { email } = req.body || {};
+  // validation and provider code same as above
+}
+*/
